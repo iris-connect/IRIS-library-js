@@ -6,7 +6,7 @@ describe('index', () => {
       const testName = 'testName';
       const greetingPhrase = greet(testName);
 
-      expect(greetingPhrase).toEqual(`Hi ${testName}!`);
+      expect(greetingPhrase).toEqual(`Hello ${testName}!`);
     });
   });
 });
