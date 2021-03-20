@@ -1,21 +1,36 @@
-# TS Module Boilerplate [![Build Status](https://travis-ci.org/silver-xu/ts-module-boilerplate.svg?branch=master)](https://travis-ci.org/silver-xu/ts-module-boilerplate) [![codecov](https://codecov.io/gh/silver-xu/ts-module-boilerplate/branch/master/graph/badge.svg)](https://codecov.io/gh/silver-xu/ts-module-boilerplate) [![greenkeeper](https://badges.greenkeeper.io/silver-xu/ts-module-boilerplate.svg?style=flat)](https://badges.greenkeeper.io/silver-xu/ts-module-boilerplate.svg?style=flat)
+<p align="center" class="text-center">
+  <a href="https://digitales-wartezimmer.org/" target="blank"><img src="https://i.imgur.com/04CFoWe.png" width="320" alt="Digitales Wartezimmer Logo" /></a>
+</p>
 
-> Typescript Module boilerplate powered by ESlint, Prettier, Husky, Semantic-Release and Commitlint
+# IRIS - JS Library
 
-## Summary
+IRIS stands for "Integration of Remote systems into Infection control Software" and is intended to be the central point of mediation between the various contact, event and guest tracking apps on the one hand and the infection control software (e.g. SORMAS) in the health departments on the other.
 
-> This repo is built to start Typescript module projets quickly without missing the essential development tools and build pipelines.
+This repository is used as a client library to handle the connection with the IRIS gateway
 
-> Please feel free to fork and use as your own project template.
+## Installation
 
-## Features
+You should have [node](https://nodejs.org/en/) and npm or [yarn](https://yarnpkg.com) installed.
 
-- Typescript support
-- Linting with ESLint
-- Prettier Support
-- Travis CI Integration
-- Codecov Integration
-- Jest Integration
-- Linting check @ pre-commit
-- Semantic-Release
-- Commitlint
+```bash
+$ yarn add @inog/iris-library-js
+```
+
+## Test
+
+```bash
+# unit tests
+$ yarn test
+
+# linting
+$ yarn lint
+```
+
+## Stay in touch
+
+- Website - [https://inög.de/](https://inög.de/)
+- Twitter - [@inoeg_de](https://twitter.com/inoeg_de)
+
+## License
+
+[MIT licensed](LICENSE).
