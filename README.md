@@ -1,5 +1,5 @@
 <p align="center" class="text-center">
-  <a href="https://digitales-wartezimmer.org/" target="blank"><img src="https://i.imgur.com/04CFoWe.png" width="320" alt="Digitales Wartezimmer Logo" /></a>
+  <img src="https://i.imgur.com/04CFoWe.png" width="320" alt="IRIS Logo" />
 </p>
 
 # IRIS - JS Library
