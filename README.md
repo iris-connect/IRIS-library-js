@@ -1,5 +1,5 @@
 <p align="center" class="text-center">
-  <img src="https://i.imgur.com/04CFoWe.png" width="320" alt="IRIS Logo" />
+  <img src="https://i.imgur.com/KAwt7DS.png" width="320" alt="IRIS Logo" />
 </p>
 
 # IRIS - JS Library
