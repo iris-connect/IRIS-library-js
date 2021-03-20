@@ -10,7 +10,7 @@
         "changelogFile": "docs/CHANGELOG.md"
       }
     ],
-    "@semantic-relase/npm",
+    "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
