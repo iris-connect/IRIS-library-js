@@ -1,0 +1,6 @@
+repositoryUrl: git@github.com:silver-xu/ts-module-boilerplate.git
+plugins:
+  - '@semantic-release/commit-analyzer'
+  - '@semantic-release/release-notes-generator'
+  - '@semantic-release/npm'
+  - '@semantic-release/git'
