@@ -42,7 +42,7 @@
     "type": "git",
     "url": "https://github.com/InOG-projects/IRIS-library-js.git"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "axios": "^0.21.1"
   }
