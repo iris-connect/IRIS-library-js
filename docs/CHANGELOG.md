@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.1...v1.1.2) (2021-03-21)
+
+
+### Bug Fixes
+
+* add used nonce to data submission request ([936fb10](https://github.com/InOG-projects/IRIS-library-js/commit/936fb10ffe8df9d2bf9c3fc1c2cfb1e336554c31))
+
 ## [1.1.1](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.0...v1.1.1) (2021-03-21)
 
 
