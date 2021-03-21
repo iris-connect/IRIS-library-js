@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.2...v1.1.3) (2021-03-21)
+
+
+### Bug Fixes
+
+* generate ts declaration file for typings ([4e390a3](https://github.com/InOG-projects/IRIS-library-js/commit/4e390a3c4545d9790d04656e244523f35a205274))
+
 ## [1.1.2](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.1...v1.1.2) (2021-03-21)
 
 
