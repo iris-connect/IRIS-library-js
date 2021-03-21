@@ -3,4 +3,5 @@ export default interface IrisContactsEventsSubmissionDTO {
     secret: string;
     keyReferenz: string;
     encryptedData: string;
+    nonce: string;
 }

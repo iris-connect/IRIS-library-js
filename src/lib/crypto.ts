@@ -1,17 +1,18 @@
 import * as crypto from 'crypto';
 
-export function encryptData(keyOfHealthDepartment: string, data): { dataToTransport: string; keyToTransport: string } {
-  const publicKey = crypto.createPublicKey(keyOfHealthDepartment);
-  const iv = crypto.randomBytes(16);
+export function encryptData(
+  keyOfHealthDepartment: string,
+  data,
+): { dataToTransport: string; keyToTransport: string; nonce: string } {
+  const nonce = crypto.randomBytes(16);
   const key = crypto.randomBytes(32);
-  const cipher = crypto.createCipheriv('aes-256', key, iv);
-  const encryptedData = Buffer.concat([cipher.update(JSON.stringify(data), 'utf8'), cipher.final()]);
-  const encryptedKey = crypto.publicEncrypt(
-    { key: publicKey, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING, oaepHash: 'sha3' },
-    key,
-  );
+  const cipher = crypto.createCipheriv('AES-256-CBC', key, nonce);
+  const dataString = JSON.stringify(data);
+  const encryptedData = Buffer.concat([cipher.update(dataString, 'utf8'), cipher.final()]);
+  const encryptedKey = crypto.publicEncrypt({ key: keyOfHealthDepartment }, key);
   return {
     dataToTransport: encryptedData.toString('base64'),
     keyToTransport: encryptedKey.toString('base64'),
+    nonce: nonce.toString('base64'),
   };
 }
