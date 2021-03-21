@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.3...v1.1.4) (2021-03-21)
+
+
+### Bug Fixes
+
+* adjust data request format of health office key ([8fcf3eb](https://github.com/InOG-projects/IRIS-library-js/commit/8fcf3ebf3a69d693cea9f76180017e10622a277a))
+
 ## [1.1.3](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.2...v1.1.3) (2021-03-21)
 
 

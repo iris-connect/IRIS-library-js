@@ -8,7 +8,7 @@ function encryptData(keyOfHealthDepartment, data) {
     const cipher = crypto.createCipheriv('AES-256-CBC', key, nonce);
     const dataString = JSON.stringify(data);
     const encryptedData = Buffer.concat([cipher.update(dataString, 'utf8'), cipher.final()]);
-    const encryptedKey = crypto.publicEncrypt({ key: keyOfHealthDepartment }, key);
+    const encryptedKey = crypto.publicEncrypt({ key: Buffer.from(keyOfHealthDepartment, 'base64') }, key);
     return {
         dataToTransport: encryptedData.toString('base64'),
         keyToTransport: encryptedKey.toString('base64'),
