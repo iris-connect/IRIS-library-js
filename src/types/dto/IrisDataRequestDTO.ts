@@ -1,6 +1,6 @@
 export default interface IrisDataRequestDTO {
     healthDepartment: string;
-    keyOfHealthDepartment: string;
+    key: string;
     keyReferenz: string;
     start?: string;
     end?: string;

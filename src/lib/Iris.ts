@@ -36,7 +36,7 @@ export default class Iris {
     }
     const dataRequest = response.data as IrisDataRequestDTO;
     this.codeKeyMap.set(code, {
-      keyOfHealthDepartment: dataRequest.keyOfHealthDepartment,
+      key: dataRequest.key,
       keyReferenz: dataRequest.keyReferenz,
     });
     return {
@@ -52,15 +52,17 @@ export default class Iris {
       throw new Error("Code could not be found in key map. Did you perform 'getDataRequest' before?");
     }
     const keys = this.codeKeyMap.get(code);
-    const { dataToTransport, keyToTransport, nonce } = encryptData(keys.keyOfHealthDepartment, data);
+    const { dataToTransport, keyToTransport, nonce } = encryptData(keys.key, data);
     const response = await this.axiosInstance.post(`/data-submissions/${code}/contacts_events`, {
-      checkCode: [ getNameCheckHash(user.firstName, user.lastName), getBirthDateCheckHash(user.birthDate) ].filter(c => !!c),
+      checkCode: [getNameCheckHash(user.firstName, user.lastName), getBirthDateCheckHash(user.birthDate)].filter(
+        (c) => !!c,
+      ),
       secret: keyToTransport,
       keyReferenz: keys.keyReferenz,
       encryptedData: dataToTransport,
-      nonce 
+      nonce,
     } as IrisContactsEventsSubmissionDTO);
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       console.error('IRIS Gateway responded the following data', response.data);
       throw new Error(`Request failed with status Code ${response.status}`);
     }

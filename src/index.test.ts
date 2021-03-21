@@ -52,7 +52,7 @@ describe('index', () => {
         privateKey = priv;
         dataRequest = {
           healthDepartment: 'Test Health Department',
-          keyOfHealthDepartment: publicKey,
+          key: Buffer.from(publicKey, 'utf-8').toString('base64'),
           keyReferenz: 'random-string-keyref',
           start: '2011-10-05T14:48:00.000Z',
           end: '2021-10-05T14:48:00.000Z',
@@ -77,7 +77,7 @@ describe('index', () => {
     });
     expect(mockedAxios.get).toHaveBeenCalledWith('/data-requests/12345-abcde');
 
-    mockedAxios.post.mockResolvedValue({ status: 200, data: { success: true } });
+    mockedAxios.post.mockResolvedValue({ status: 201, data: { success: true } });
     await iris.sendContactsEvents('12345-abcde', submission, {
       firstName: 'Hans',
       lastName: 'Müller',
