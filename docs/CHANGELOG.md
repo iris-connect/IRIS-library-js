@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/InOG-projects/IRIS-library-js/compare/v1.1.0...v1.1.1) (2021-03-21)
+
+
+### Bug Fixes
+
+* added publish config to make npm package public ([ea2b9bd](https://github.com/InOG-projects/IRIS-library-js/commit/ea2b9bd3bb7c2cf0e2006ed3dd653b6047b8c6c8))
+
 # [1.1.0](https://github.com/InOG-projects/IRIS-library-js/compare/v1.0.0...v1.1.0) (2021-03-21)
 
 
