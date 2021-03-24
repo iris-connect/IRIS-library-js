@@ -20,6 +20,11 @@ export default class Iris {
   private axiosInstance: AxiosInstance;
   private codeKeyMap: IrisCodeKeyMap;
 
+  /**
+   * Generate an instance of the IRIS connector library
+   * 
+   * @param options General settings like baseUrl
+   */
   constructor(options: Partial<IrisOptions>) {
     this.codeKeyMap = new Map();
     const opts: IrisOptions = Object.assign(defaultOptions, options);
@@ -28,6 +33,12 @@ export default class Iris {
     });
   }
 
+  /**
+   * Retrieve the data request and relevant information of the requesting health office
+   * 
+   * @param code The code tied to the data request
+   * @returns Data Request
+   */
   async getDataRequest(code: IrisCode): Promise<IrisDataRequest> {
     const response = await this.axiosInstance.get(`/data-requests/${code}`);
     if (response.status !== 200) {
@@ -47,6 +58,13 @@ export default class Iris {
     };
   }
 
+  /**
+   * Sends Contact and event information to IRIS
+   * 
+   * @param code The code tied to the data request
+   * @param data Data to be sent
+   * @param user Information about the user sending the data
+   */
   async sendContactsEvents(code: IrisCode, data: IrisContactsEvents, user: IrisUserInfo): Promise<void> {
     if (!this.codeKeyMap.has(code)) {
       throw new Error("Code could not be found in key map. Did you perform 'getDataRequest' before?");
