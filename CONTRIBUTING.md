@@ -10,11 +10,11 @@ As a user, you are the perfect candidate to help us improve our documentation: t
 
 ### Give feedback on issues
 
-Some [issues](https://github.com/InOG-projects/IRIS-library-js/issues) are created without enough information to reproduce or resolve them. Help make them easier to resolve by adding any relevant information.
+Some [issues](https://github.com/iris-gateway/IRIS-library-js/issues) are created without enough information to reproduce or resolve them. Help make them easier to resolve by adding any relevant information.
 
 ### Fix bugs and implement features
 
-Take a look at the currently open [issues](https://github.com/InOG-projects/IRIS-library-js/issues) or find a bug or feature you want to see implemented and go for it.
+Take a look at the currently open [issues](https://github.com/iris-gateway/IRIS-library-js/issues) or find a bug or feature you want to see implemented and go for it.
 
 ## Working with the code
 
@@ -26,7 +26,7 @@ Fork the project and clone your fork:
 
 ```bash
 # Clone Repository
-$ git clone https://github.com/InOG-projects/IRIS-library-js/
+$ git clone https://github.com/iris-gateway/IRIS-library-js/
 # Navigate to newly cloned directory
 $ cd IRIS-library-js
 # Install dependencies
@@ -188,4 +188,4 @@ $ git push origin <topic-branch-name>
 
 ## Support
 
-Should you need any help, let the maintainers know, send an email, or open an [issue](https://github.com/InOG-projects/IRIS-library-js/issues).
+Should you need any help, let the maintainers know, send an email, or open an [issue](https://github.com/iris-gateway/IRIS-library-js/issues).

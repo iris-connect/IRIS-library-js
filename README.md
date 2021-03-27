@@ -3,8 +3,8 @@
 </p>
 
 <p align="center" class="text-center">
-  <img alt="" src="https://img.shields.io/github/workflow/status/inog-projects/iris-library-js/Release/main"/>
-  <img alt="" src="https://shields.io/github/issues/InOG-projects/IRIS-library-js"/>
+  <img alt="" src="https://img.shields.io/github/workflow/status/iris-gateway/iris-library-js/Release/main"/>
+  <img alt="" src="https://shields.io/github/issues/iris-gateway/IRIS-library-js"/>
   <img alt="" src="https://shields.io/npm/l/@inog/iris-library-js"/>
   <img alt="" src="https://shields.io/npm/v/@inog/iris-library-js"/>
 </p>
@@ -59,7 +59,7 @@ await iris.sendContactsEvents('12345-abcd', { your: 'data' }, { firstName: 'Send
 
 ## Changelog
 
-For a list of changes, please refer to the [CHANGELOG](docs/CHANGELOG.md).
+For a list of changes, please refer to the [CHANGELOG](CHANGELOG.md).
 
 ## Contributions
 
