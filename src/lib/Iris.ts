@@ -84,5 +84,6 @@ export default class Iris {
       console.error('IRIS Gateway responded the following data', response.data);
       throw new Error(`Request failed with status Code ${response.status}`);
     }
+    this.codeKeyMap.delete(code);
   }
 }
