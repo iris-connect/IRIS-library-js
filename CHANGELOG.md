@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/iris-gateway/IRIS-library-js/compare/v1.1.4...v1.1.5) (2021-03-27)
+
+
+### Bug Fixes
+
+* remove code from codeKeyMap after sending data ([b43ba7b](https://github.com/iris-gateway/IRIS-library-js/commit/b43ba7bedfb4ecf1f47c71dc96dcb4ba903d3042)), closes [#3](https://github.com/iris-gateway/IRIS-library-js/issues/3)
+
 ## [1.1.4](https://github.com/iris-gateway/IRIS-library-js/compare/v1.1.3...v1.1.4) (2021-03-21)
 
 

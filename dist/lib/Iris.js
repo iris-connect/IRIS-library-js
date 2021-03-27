@@ -7,6 +7,11 @@ const defaultOptions = {
     baseUrl: '',
 };
 class Iris {
+    /**
+     * Generate an instance of the IRIS connector library
+     *
+     * @param options General settings like baseUrl
+     */
     constructor(options) {
         this.codeKeyMap = new Map();
         const opts = Object.assign(defaultOptions, options);
@@ -14,6 +19,12 @@ class Iris {
             baseURL: opts.baseUrl,
         });
     }
+    /**
+     * Retrieve the data request and relevant information of the requesting health office
+     *
+     * @param code The code tied to the data request
+     * @returns Data Request
+     */
     async getDataRequest(code) {
         const response = await this.axiosInstance.get(`/data-requests/${code}`);
         if (response.status !== 200) {
@@ -32,6 +43,13 @@ class Iris {
             requestDetails: dataRequest.requestDetails,
         };
     }
+    /**
+     * Sends Contact and event information to IRIS
+     *
+     * @param code The code tied to the data request
+     * @param data Data to be sent
+     * @param user Information about the user sending the data
+     */
     async sendContactsEvents(code, data, user) {
         if (!this.codeKeyMap.has(code)) {
             throw new Error("Code could not be found in key map. Did you perform 'getDataRequest' before?");
@@ -49,6 +67,7 @@ class Iris {
             console.error('IRIS Gateway responded the following data', response.data);
             throw new Error(`Request failed with status Code ${response.status}`);
         }
+        this.codeKeyMap.delete(code);
     }
 }
 exports.default = Iris;
