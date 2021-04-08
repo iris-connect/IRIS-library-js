@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/iris-gateway/IRIS-library-js/compare/v1.1.5...v1.2.0) (2021-04-08)
+
+
+### Features
+
+* use WebCrypto API instead of node crypto ([f6573be](https://github.com/iris-gateway/IRIS-library-js/commit/f6573be6cec7fee6d002d7d0bed7e95e57d8715c)), closes [#4](https://github.com/iris-gateway/IRIS-library-js/issues/4)
+
 ## [1.1.5](https://github.com/iris-gateway/IRIS-library-js/compare/v1.1.4...v1.1.5) (2021-03-27)
 
 
