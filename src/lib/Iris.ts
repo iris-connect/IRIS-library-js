@@ -70,7 +70,7 @@ export default class Iris {
       throw new Error("Code could not be found in key map. Did you perform 'getDataRequest' before?");
     }
     const keys = this.codeKeyMap.get(code);
-    const { dataToTransport, keyToTransport, nonce } = encryptData(keys.key, data);
+    const { dataToTransport, keyToTransport, nonce } = await encryptData(keys.key, data);
     const response = await this.axiosInstance.post(`/data-submissions/${code}/contacts_events`, {
       checkCode: [getNameCheckHash(user.firstName, user.lastName), getBirthDateCheckHash(user.birthDate)].filter(
         (c) => !!c,

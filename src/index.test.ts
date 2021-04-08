@@ -1,15 +1,24 @@
 import axios from 'axios';
-import * as crypto from 'crypto';
+import { Crypto } from '@peculiar/webcrypto';
+import { pack, ab2str, unpack, decode } from './lib/util';
+import * as md5 from 'md5';
+
+const crypto = new Crypto();
 
 import Iris from '.';
 import IrisDataRequestDTO from './types/dto/IrisDataRequestDTO';
 import IrisContactsEvents from './types/IrisContactsEvents';
 
+if (typeof TextEncoder === 'undefined') {
+  global.TextEncoder = require('util').TextEncoder;
+  global.TextDecoder = require('util').TextDecoder;
+}
+
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('index', () => {
-  let privateKey: string;
+  let privateKey: CryptoKey;
   let publicKey: string;
   let dataRequest: IrisDataRequestDTO;
   const submission: IrisContactsEvents = {
@@ -28,38 +37,34 @@ describe('index', () => {
       },
     },
   };
-  beforeAll((done) => {
+  beforeAll(async (done) => {
     mockedAxios.create.mockImplementation(() => {
       return mockedAxios;
     });
-    crypto.generateKeyPair(
-      'rsa',
+    const keys = await crypto.subtle.generateKey(
       {
-        modulusLength: 4096,
-        publicKeyEncoding: {
-          type: 'spki',
-          format: 'pem',
-        },
-        privateKeyEncoding: {
-          type: 'pkcs8',
-          format: 'pem',
-          cipher: 'aes-256-cbc',
-          passphrase: 'top secret',
-        },
+        name: 'RSA-OAEP',
+        hash: 'SHA-256', // SHA-1, SHA-256, SHA-384, or SHA-512
+        publicExponent: new Uint8Array([1, 0, 1]), // 0x03 or 0x010001
+        modulusLength: 2048, // 1024, 2048, or 4096
       },
-      (err, pub, priv) => {
-        publicKey = pub;
-        privateKey = priv;
-        dataRequest = {
-          healthDepartment: 'Test Health Department',
-          key: Buffer.from(publicKey, 'utf-8').toString('base64'),
-          keyReferenz: 'random-string-keyref',
-          start: '2011-10-05T14:48:00.000Z',
-          end: '2021-10-05T14:48:00.000Z',
-        };
-        done(err);
-      },
+      true,
+      ['encrypt', 'decrypt'],
     );
+    const exported = await crypto.subtle.exportKey('spki', keys.publicKey);
+    const exportedAsString = ab2str(exported);
+    const exportedAsBase64 = window.btoa(exportedAsString);
+    publicKey = `-----BEGIN PUBLIC KEY-----\n${exportedAsBase64}\n-----END PUBLIC KEY-----`;
+
+    privateKey = keys.privateKey;
+    dataRequest = {
+      healthDepartment: 'Test Health Department',
+      key: window.btoa(publicKey),
+      keyReferenz: 'random-string-keyref',
+      start: '2011-10-05T14:48:00.000Z',
+      end: '2021-10-05T14:48:00.000Z',
+    };
+    done();
   });
   it('provides the Iris class', () => {
     expect(new Iris({})).toBeDefined();
@@ -92,16 +97,28 @@ describe('index', () => {
     });
     const submittedData = mockedAxios.post.mock.calls[0][1];
 
-    expect(submittedData.checkCode[0]).toEqual(crypto.createHash('md5').update('hansmller').digest('base64'));
-    expect(submittedData.checkCode[1]).toEqual(crypto.createHash('md5').update('19630105').digest('base64'));
+    expect(submittedData.checkCode[0]).toEqual(md5('hansmller'));
+    expect(submittedData.checkCode[1]).toEqual(md5('19630105'));
 
-    const symmetricKey = crypto.privateDecrypt(
-      { key: privateKey, passphrase: 'top secret' },
-      Buffer.from(submittedData.secret, 'base64'),
+    const symmetricKeyData = await crypto.subtle.decrypt(
+      {
+        name: 'RSA-OAEP',
+      },
+      privateKey, // RSA private key
+      Buffer.from(submittedData.secret, 'base64'), // BufferSource
     );
-    const decipher = crypto.createDecipheriv('AES-256-CBC', symmetricKey, Buffer.from(submittedData.nonce, 'base64'));
-    let receivedPlaintext = decipher.update(submittedData.encryptedData, 'base64', 'utf8');
-    receivedPlaintext += decipher.final();
-    expect(JSON.parse(receivedPlaintext)).toEqual(submission);
+    const symmetricKey = await crypto.subtle.importKey('raw', symmetricKeyData, 'AES-GCM', true, ['decrypt']);
+    const decryptedData = pack(
+      await crypto.subtle.decrypt(
+        {
+          name: 'AES-GCM',
+          iv: Buffer.from(submittedData.nonce, 'base64'),
+        },
+        symmetricKey, // AES key
+        Buffer.from(submittedData.encryptedData, 'base64'), // BufferSource
+      ),
+    );
+    const result = decode(new Uint8Array(unpack(decryptedData)));
+    expect(JSON.parse(result)).toEqual(submission);
   });
 });
